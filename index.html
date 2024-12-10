@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Project</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div>
+        Inafara Vue!
+    </div>
+    <div id="app">
+        Numele meu este {{name}}!
+        <h1 v-if="message.length > 10"> {{message}}</h1>
+        <h2 v-else v-once>{{message}}</h2>
+
+        <a v-if="showHideLink > 0.5" :href="link">Emanuel Univ.</a>
+        <br />
+        <button @click="showLink">Renew the visibility {{showHideLink}}</button>
+        <br />
+
+        <ul>
+            <li v-for="student in students">{{student.name}}: {{student.grade}}</li>
+
+        </ul>
+
+        <br />
+
+        <button @click>Count</button>
+        <button @click="changeText('Text Changed!')">Change Text</button>
+        <button @click="revertText">Revert Text</button>
+
+        <br />
+
+        <input type="text" v-model="message">
+        <input type="text" v-model="message">
+        <input type="text" v-model="message">
+    </div>
+
+    <div>
+        Inafara Vue!
+    </div>
+
+    <div id="app2">
+        Numele meu este {{name}}!
+        <h1> {{message}}</h1>
+        <h2>{{message}}</h2>
+    </div>
+
+    <script>
+        const DEFAULT_MESSAGE = "Hello from Vue!";
+        Vue.createApp({
+            data() {
+                return {
+                    message: DEFAULT_MESSAGE,
+                    name: "Brian",
+                    link: "http://emanuel.ro",
+                    showHideLink: Math.random(),
+                    students: [
+                        { name: "Nathan", grade: 9 },
+                        { name: "Caleb", grade: 9 },
+                        { name: "Cristi", grade: 5 }
+                    ]
+                }
+            },
+            methods: {
+                changeText: function (message) {
+                    this.message = message
+                },
+                revertText: function () {
+                    this.message = DEFAULT_MESSAGE
+                },
+                showLink: function () {
+                    this.showHideLink = Math.random()
+                }
+            }
+        }).mount("#app");
+
+        Vue.createApp({
+            data() {
+                return {
+                    message: "Hello from Vue!",
+                    name: "Brian"
+                }
+            }
+        }).mount("#app2");
+    </script>
+</body>
+
+</html>
